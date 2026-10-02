@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cache Memory - Interactive Web Page</title>
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+        .header {
+            background-color: DodgerBlue;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 35px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: DodgerBlue;
+        }
+
+        .memory {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+
+        .box {
+            width: 200px;
+            padding: 20px;
+            text-align: center;
+            border: 3px solid black;
+            border-radius: 10px;
+        }
+
+        .cache {
+            background-color: lightgreen;
+        }
+
+        .ram {
+            background-color: lightyellow;
+        }
+
+        button {
+            background-color: DodgerBlue;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: RoyalBlue;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #eeeeee;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        CACHE MEMORY
+    </div>
+
+    <div class="container">
+
+        <h2>What is Cache Memory?</h2>
+
+        <p>
+            Cache memory is a small and very fast type of memory
+            located close to the CPU. It stores frequently used data
+            so the CPU can access it faster.
+        </p>
+
+        <h2>How Does Cache Memory Work?</h2>
+
+        <p>
+            When the CPU needs information, it first checks the cache.
+            If the information is found, this is called a
+            <b>Cache Hit</b>.
+            If it is not found, this is called a
+            <b>Cache Miss</b>, and the computer must get the information
+            from RAM.
+        </p>
+
+        <div class="memory">
+
+            <div class="box cache">
+                <h3>Cache Memory</h3>
+                <p>Fast</p>
+                <p>Small</p>
+            </div>
+
+            <div class="box">
+                <h3>CPU</h3>
+                <p>Requests Data</p>
+            </div>
+
+            <div class="box ram">
+                <h3>RAM</h3>
+                <p>Slower</p>
+                <p>Larger</p>
+            </div>
+
+        </div>
+
+        <h2>Interactive Cache Simulation</h2>
+
+        <p>
+            Click the button to make the CPU request data.
+            The computer will first check the cache.
+        </p>
+
+        <button onclick="checkCache()">Request Data</button>
+
+        <div id="result">
+            Click the button to start the simulation.
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Student 1 - Interactive Cache Memory Web Page
+    </div>
+
+
+    <script>
+
+        let cache = [];
+
+        function checkCache() {
+
+            let data = Math.floor(Math.random() * 5) + 1;
+
+            if (cache.includes(data)) {
+
+                document.getElementById("result").innerHTML =
+                    "✅ Cache Hit! Data " + data +
+                    " was found in the cache. The CPU gets it quickly.";
+
+            } else {
+
+                document.getElementById("result").innerHTML =
+                    "❌ Cache Miss! Data " + data +
+                    " was not in the cache. The CPU must get it from RAM.";
+
+                cache.push(data);
+
+                if (cache.length > 3) {
+                    cache.shift();
+                }
+            }
+
+            document.getElementById("result").innerHTML +=
+                "<br><br>Current Cache: " + cache.join(", ");
+        }
+
+    </script>
+
+</body>
+</html>
